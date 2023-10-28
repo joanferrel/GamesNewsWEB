@@ -1,7 +1,8 @@
-const express = require("express");
-const server = express()
+const app = require("./src/app")
 
-server.get('/',(req,res)=>{
+
+
+app.get('/',(req,res)=>{
     res.send('Probando ruta con express')
 })
-server.listen(3001, ()=> console.log('server conectado en el puerto 3001'))
+app.listen(3001, ()=> console.log('server conectado en el puerto 3001'))

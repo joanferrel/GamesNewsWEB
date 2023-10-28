@@ -1,14 +1,14 @@
 const {Router} = require ("express");
 
-const userRouter = require("./userRouter");
+const usersRouter = require("./usersRouter");
 const postRouter = require("./postRouter");
 
 
 
 const mainRouter = Router();
 
-
-
-mainRouter.use("/users", userRouter);
+//Error2
+//Este usersRouter tiene que tene el mismo nombre que el archivo
+mainRouter.use("/users", usersRouter);
 mainRouter.use("/posts", postRouter);
 module.exports = mainRouter;
