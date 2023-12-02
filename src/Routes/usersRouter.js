@@ -18,7 +18,7 @@ const {Router} = require ("express");
 //     res.status(200).send("detalle del usuario"); //HANDLER
 // });
 // Modularizado para el uso de handlers::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-const {getDetailHandler,getUsersHandler}= require("../handlers/userHandler");
+const {getDetailHandler,getUsersHandler, createUserHandler}= require("../handlers/userHandler");
 const usersRouter = Router();
 //IMPORTANTE
 //Los hadlerseran convocados cuando lleguen al /"" o al /:id
@@ -30,4 +30,6 @@ const usersRouter = Router();
 // El controller e otra funcion
 usersRouter.get("/", getUsersHandler);
 usersRouter.get("/:id", getDetailHandler);
+usersRouter.post("/", createUserHandler);
+
 module.exports = usersRouter;

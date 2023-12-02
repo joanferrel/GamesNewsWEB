@@ -9,7 +9,8 @@ const app = express();
 
 
 app.use(morgan("dev"));
-
+//Ya este el pacrhe de body
+app.use(express.json());
 app.use(mainRouter);
 
 module.exports = app;
