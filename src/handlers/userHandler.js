@@ -1,18 +1,38 @@
 //GET
-const {createUserDB} = require("../controlers/userControllers")
-const getUsersHandler= (req, res)=>{ //RUTA
+const {createUserDB, getUserById, getAllUsers,getUserByName} = require("../controlers/userControllers")
 
 
-    const {name,race}= req.query;
-    if(name) res.status(200).send(`Aqui esta el usuario ${name}`);
+const getUsersHandler=  async (req, res)=>{ //RUTA
 
-
-    res.status(200).send("Aqui estan todos lo usuarios"); //HANDLER
+    const {name}= req.query;
+    try {
+        if (name) {
+            const userByName = await getUserByName(name)
+            res.status(200).json(userByName)
+        } else {
+            const response= await getAllUsers()
+            res.status(200).json(response);
+            
+        }
+        
+    } catch (error) {
+        res.status(400).json({error:error.message})
+        
+    }
 };
 
-const getDetailHandler= (req, res)=>{ //RUTA
+const getDetailHandler= async(req, res)=>{ //RUTA
     const {id}= req.params;
-    res.status(200).send(`Detalle del usuario ${id}`); //HANDLER
+    const source = isNaN(id) ? "bdd" : "api"
+    try {
+        const response = await getUserById(id,source);
+        res.status(200).json(response)
+        return;
+    } catch (error) {
+        res.status(400).json({error:error.message})
+        
+    }
+
 };
 
 
@@ -22,7 +42,7 @@ const getDetailHandler= (req, res)=>{ //RUTA
 const createUserHandler= async(req, res)=>{ //RUTA
     const{name,email,phone}= req.body;
     try {
-        const response = await createUserDB(name,email,phone)
+        const response = await createUserDB(name,email,phone);
         res.status(200).json(response)
         return;
     } catch (error) {

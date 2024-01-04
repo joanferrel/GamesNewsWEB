@@ -9,3 +9,9 @@ app.listen(3001, ()=> {
     conn.sync({force:true});
     console.log('server conectado en el puerto 3001');
 });
+/* {
+    "name":"Bartolomiau",
+    "email":"gaturro@gmail.com",
+    "phone":987
+    
+  } */
