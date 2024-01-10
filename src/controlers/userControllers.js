@@ -8,8 +8,12 @@ const getUserById = async (id,source)=>{
     const user= source ==="api"
     ? (await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`))
     .data
-    :await User.findByPk(id);
-    return user;
+    :await User.findByPk(id,{
+        include:{
+            model: Post,
+            attributes:["title","body"],
+        }
+    });
 };
 
 const infoCleaner =(arr) =>arr.map(user =>{
